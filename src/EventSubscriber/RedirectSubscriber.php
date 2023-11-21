@@ -12,7 +12,7 @@ class RedirectSubscriber implements EventSubscriberInterface
     public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
-        $route = $request->getPathInfo();
+        $route = $request->getPathInfo(); // getRequestUri -> /event/no-way?page=1
 
         $routeToRedirect = ['/event/no-way' => '/event/new-way'];
 
