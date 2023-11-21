@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Bienvenue à notre formation Symfony Avance</h1>
+    <hr />
+    <p>Bonjour {{ name }}</p>
+    <p>Merci de vous êtes inscrit sur notre <b>application</b></p>
+    <p>
+        Votre <mark>espace personnel</mark> est maintenant disponible<br />
+        vous pouvez y accéder depuis cette adresse: <a href="{{ url('home_index') }}">{{ url('home_index') }}</a>
+    </p>
+    <img src="{{ email.image('@images/grogu.jpg') }}" alt="Logo" />
+</body>
+</html>
