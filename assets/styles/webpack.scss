@@ -1,0 +1,17 @@
+$main-bg-color: #333;
+$main-font-color: #fff;
+$link-color: #f00;
+
+body {
+  background-color: $main-bg-color;
+  color: $main-font-color;
+}
+
+a {
+  color: lighten($link-color, 15%);
+
+  &:hover{
+    color: $link-color;
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evènements{% endblock %}
+
+{% block body %}
+    <h1>Les évènements</h1>
+
+    <p class="lead">Salut {{ name }} !</p>
+
+    <h2>Kernel</h2>
+
+    <a href="https://symfony.com/doc/current/reference/events.html" target="_blank">Liste des events du kernel</a>
+    <ul>
+        <li>Request</li>
+        <li>Controller</li>
+        <li>ControllerArguments</li>
+        <li>View</li>
+        <li>Response</li>
+        <li>FinishRequest</li>
+        <li>Terminate</li>
+        <li>Exception</li>
+    </ul>
+
+    <h2>Exercice</h2>
+
+    <p>
+        Créer un événement qui quand on accède à la route /event/no-way,
+        nous redirige vers la route /event/new-way (redirection -> status 301)
+    </p>
+
+    <p>
+        <a href="/event/no-way">Accéder à notre page</a>
+    </p>
+
+{% endblock %}

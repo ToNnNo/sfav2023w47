@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Composant Cache{% endblock %}
+
+{% block body %}
+    <h1>Composant Cache</h1>
+
+    <div class="mb-3">
+        <a href="{{ path('cache_user_remove') }}" class="btn btn-outline-primary">
+            Rafraichir tous les caches
+        </a>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

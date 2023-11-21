@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Webpack Encore{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('webpack') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('webpack') }}
+{% endblock %}
+
+{% block body %}
+    <h1>Webpack Encore</h1>
+
+    <div>
+        <img src="{{ asset('build/images/grogu.jpg') }}" class="img-fluid rounded" alt="grogu boit dans un bol" />
+    </div>
+
+    <section>
+        <h2>Installer NodeJS</h2>
+
+        <p>
+            <a href="https://nodejs.org/en" target="_blank">Installer Node</a>
+        </p>
+
+        <h2>Installer Webpack Encore</h2>
+
+        <p><code>composer require webpack</code></p>
+
+        <h2>Installer les dépendances de node</h2>
+
+        <p><code>npm install</code></p>
+
+        <p>Permet de télécharger les dépendances de Node pouur Webpack Encore</p>
+
+        <h2>Compiler les assets</h2>
+
+        <p><code>npm run dev</code></p>
+
+        <h2>Fichiers</h2>
+
+        <p><code>npm install file-loader@^6.0.0 --save-dev</code></p>
+    </section>
+
+{% endblock %}
