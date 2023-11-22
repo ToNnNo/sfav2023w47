@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les formulaires: Data Mapper{% endblock %}
+
+{% block body %}
+    <h1>Les formulaires: Data Mapper</h1>
+
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <div>
+        <button class="btn btn-outline-primary">Filter</button>
+    </div>
+    {{ form_end(form) }}
+
+    <h2>Calendrier de {{ date|format_date(pattern='MMMM y') }}</h2>
+{% endblock %}

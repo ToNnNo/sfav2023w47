@@ -1,38 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 
-        {{ encore_entry_link_tags('app') }}
-        {% block stylesheets %}{% endblock %}
+    {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}{% endblock %}
 
-        {{ encore_entry_script_tags('app') }}
-        {% block javascripts %}{% endblock %}
-    </head>
-    <body>
-        <div class="container-fluid">
-            <header class="pt-5">
-                <p class="h1">Formation Symfony Avancé: Université de Reims</p>
-                <hr />
-            </header>
-            <nav class="nav">
-                <a href="{{ path('home_index') }}" class="nav-link">Accueil</a>
-                <a href="{{ path('webpack_index') }}" class="nav-link">Webpack</a>
-                <a href="{{ path('cache_index') }}" class="nav-link">Cache Contracts</a>
-                <a href="{{ path('cache_psr6') }}" class="nav-link">Cache PSR6</a>
-                <a href="{{ path('event_index') }}" class="nav-link">Events</a>
-                <a href="{{ path('mailer_index') }}" class="nav-link">Envoyer un email</a>
-            </nav>
-            <hr />
-            <main>
-            {% block body %}{% endblock %}
-            </main>
-            <footer>
-                <hr />
-                <p class="small text-center"> Symfony Avancé - Dawan FOAD Université de Reims - Novembre 2023</p>
-            </footer>
-        </div>
-    </body>
+    {{ encore_entry_script_tags('app') }}
+    {% block javascripts %}{% endblock %}
+</head>
+<body>
+<div class="container-fluid">
+    <header class="pt-5">
+        <p class="h1">Formation Symfony Avancé: Université de Reims</p>
+        <hr/>
+    </header>
+    <nav class="nav">
+        <a href="{{ path('home_index') }}" class="nav-link">Accueil</a>
+        <a href="{{ path('webpack_index') }}" class="nav-link">Webpack</a>
+        <a href="{{ path('cache_index') }}" class="nav-link">Cache Contracts</a>
+        <a href="{{ path('cache_psr6') }}" class="nav-link">Cache PSR6</a>
+        <a href="{{ path('event_index') }}" class="nav-link">Events</a>
+        <a href="{{ path('mailer_index') }}" class="nav-link">Envoyer un email</a>
+        <a href="{{ path('form_index') }}" class="nav-link">Formulaire</a>
+        <a href="{{ path('form_data_mapper') }}" class="nav-link">Data Mapper</a>
+    </nav>
+    <hr/>
+    <main>
+        {% for type, messages in app.flashes %}
+            <div class="alert alert-{{ type }} alert-dismissible">
+            {% for message in messages %}
+                {{ message }}
+                {% if not loop.last %}<br />{% endif %}
+            {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+        {% endfor %}
+
+        {% block body %}{% endblock %}
+    </main>
+    <footer>
+        <hr/>
+        <p class="small text-center"> Symfony Avancé - Dawan FOAD Université de Reims - Novembre 2023</p>
+    </footer>
+</div>
+</body>
 </html>

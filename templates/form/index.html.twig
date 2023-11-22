@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Formulaires{% endblock %}
+
+{% block body %}
+    <h1>Les formulaires</h1>
+
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <div>
+        <button class="btn btn-outline-primary">Sauvegarder</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

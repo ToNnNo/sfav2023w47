@@ -1,0 +1,11 @@
+{% block extra_text_widget -%}
+    <div class="input-group">
+        {% if text_before is not null %}
+            <span class="input-group-text">{{ text_before|raw }}</span>
+        {% endif %}
+        {{- block('form_widget_simple') -}}
+        {% if text_after is not null %}
+            <span class="input-group-text">{{ text_after|raw }}</span>
+        {% endif %}
+    </div>
+{%- endblock %}
