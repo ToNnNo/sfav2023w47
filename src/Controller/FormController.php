@@ -41,6 +41,25 @@ class FormController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/edit', name: 'edit')]
+    public function edit(Post $post, Request $request): Response
+    {
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->flush();
+
+            $this->addFlash('success', "L'article a bien été modifié");
+
+            return $this->redirectToRoute('form_edit', ['id' => $post->getId()]);
+        }
+
+        return $this->render('form/index.html.twig', [
+            'form' => $form
+        ]);
+    }
+
     #[Route('/data-mapper', name: 'data_mapper')]
     public function dataMapper(Request $request): Response
     {

@@ -7,6 +7,8 @@ use App\Form\Custom\ExtraTextType;
 use App\Form\Transformer\TagsTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PostType extends AbstractType
@@ -26,6 +28,30 @@ class PostType extends AbstractType
 
         $builder->get('tags')
             ->addViewTransformer(new TagsTransformer());
+
+        $builder
+            ->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) {
+                /** @var Post $post */
+                $post = $event->getData();
+                $form = $event->getForm();
+
+                if(!$post) {
+                    return;
+                }
+
+                if($post->getState() == 'published') {
+                    $form->add('publishedAt');
+                }
+            })
+            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+                /** @var Post $post */
+                $post = $event->getData();
+
+                if($post->getState() == 'published' && $post->getPublishedAt() == null) {
+                    $post->setPublishedAt(new \DateTimeImmutable());
+                    $event->setData($post);
+                }
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver): void

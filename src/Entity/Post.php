@@ -29,6 +29,9 @@ class Post
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $state = 'draft';
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $publishedAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,6 +81,18 @@ class Post
     public function setState(?string $state): static
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeImmutable
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(?\DateTimeImmutable $publishedAt): static
+    {
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }
