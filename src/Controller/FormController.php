@@ -5,17 +5,21 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\MonthYearType;
 use App\Form\PostType;
+use App\Message\SavePost;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DelayStamp;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/form', name: 'form_')]
 class FormController extends AbstractController
 {
     public function __construct(
-        private readonly EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager,
+        private readonly MessageBusInterface $bus
     )
     {
     }
@@ -28,10 +32,20 @@ class FormController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($post);
-            $this->entityManager->flush();
+            $delay = (new \DateTime())
+                ->setTime(12, 30, 00);
 
-            $this->addFlash('success', "L'article a bien été enregistré");
+            // envoie le message vers le broker
+            $this->bus->dispatch(
+                new SavePost($post),
+                [DelayStamp::delayUntil($delay)]
+            );
+
+            /*$this->entityManager->persist($post);
+            $this->entityManager->flush();
+            $this->addFlash('success', "L'article a bien été enregistré");*/
+
+            $this->addFlash('success', "Votre demande d'enregistrement a bien été prise en compte et sera traitée plus tard");
 
             return $this->redirectToRoute('form_index');
         }
