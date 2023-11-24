@@ -33,7 +33,7 @@ class SendMailSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            // TerminateEvent::NAME => 'onTerminate',
+            TerminateEvent::NAME => 'onTerminate',
         ];
     }
 }

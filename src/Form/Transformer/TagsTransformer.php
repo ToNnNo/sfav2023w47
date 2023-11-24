@@ -10,7 +10,7 @@ class TagsTransformer implements DataTransformerInterface
     /**
      * @inheritDoc
      */
-    public function transform(mixed $arrayToString)
+    public function transform(mixed $arrayToString): mixed
     {
         return implode(', ', $arrayToString ?? []);
     }
@@ -18,7 +18,7 @@ class TagsTransformer implements DataTransformerInterface
     /**
      * @inheritDoc
      */
-    public function reverseTransform(mixed $stringToArray)
+    public function reverseTransform(mixed $stringToArray): mixed
     {
         return array_map('trim', explode(',', $stringToArray));
     }
